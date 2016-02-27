@@ -1,0 +1,61 @@
+doctype html
+html(ng-app='dashboardApp')
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/dashboard.css')
+    body
+        div(id='gamesList')
+            div(class='innerBlock')
+                div(class='listTitle') OPENED GAMES
+                div(class='listTitleHr')
+                div(class='list')
+                    div(class='listItem')
+                        div(class='gameId') #1
+                        div(class='gamePlayers') PLAYERS 1/2
+                        div(class='joinBtn')
+                            button JOIN
+                        div(class='cleatBoth')
+
+        div(id='gamesList')
+            div(class='innerBlock')
+                div(class='listTitle') AVAILABLE PLAYERS
+                div(class='listTitleHr')
+                div(class='list')
+                    div(class='listItem')
+                        div(class='userInfo')
+                            span(class='username') username
+                            span(class='userLevel')  (level 57)
+                        div(class='userControls')
+                            button INVITE
+                        div(class='cleatBoth')
+
+        div(id='profileAndLineup')
+            div(id='profile')
+                p(id='username') Johnmohnachev
+                p(id='level') 43
+                div(id='achievements') ...
+            div(id='lineupAndCreateGames')
+                div(id='createGameButtons')
+                    div(class='createGameBtn') CREATE GAME 1 vs 1
+                    div(class='createGameBtn') CREATE GAME 1 vs 4
+                    div(class='createGameBtn') CREATE GAME 2 vs 2
+                div(id='lineup')
+                    div(class='player')
+                        span Test 56
+                        span EXCLUDE
+                    div(class='player')
+                        span Test 56
+                        span EXCLUDE
+                    div(class='player')
+                        span Test 56
+                        span EXCLUDE
+                    div(class='player')
+                        span Test 56
+                        span EXCLUDE
+
+
+
+    footer
+        script(src='/libraries/angular_1.5.0.js')
+        script(src='/libraries/socket.io-1.4.5.js')
+        script(src='/javascripts/pages/dashboard/dashboard.js')

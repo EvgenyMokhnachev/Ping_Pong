@@ -4,16 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var uuid = require('uuid');
 
-var routes = require('./routes/index');
+var session = require('express-session');
+
+var checkAuthorization = require('./routes/checkAuthorization');
+var dashboardCtrl = require('./routes/dashboardCtrl');
 var userCtrl = require('./routes/userCtrl');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
+var SessionService = require('./services/SessionService.js');
+
 var app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -25,7 +30,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use(session({
+  secret: 'keyboardCat',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(function (req, res, next) {
+  SessionService.init(req);
+  next()
+});
+
+app.use('/*', checkAuthorization);
+app.use('/', dashboardCtrl);
 app.use('/user', userCtrl);
 
 // catch 404 and forward to error handler

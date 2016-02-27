@@ -10,7 +10,9 @@
             email: email.value,
             password: password.value
         }, function(responce){
-            console.log(responce);
+            if(responce.success) {
+                window.location.pathname = '/';
+            }
         }, function(error){
             console.log(error);
         });
@@ -21,7 +23,9 @@
             email: email.value,
             password: password.value
         }, function(responce){
-            console.log(responce);
+            if(responce.success) {
+                window.location.pathname = '/';
+            }
         }, function(error){
             console.log(error);
         });

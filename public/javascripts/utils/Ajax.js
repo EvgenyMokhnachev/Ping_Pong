@@ -24,8 +24,16 @@ var Ajax = (function(){
             var req = new XMLHttpRequest();
             req.open('POST', path, true);
             req.setRequestHeader("Content-Type", "application/json");
-            req.onload = success;
-            req.onerror = error;
+            req.onload = function(xhr){
+                if(success) {
+                    success(JSON.parse(xhr.target.response));
+                }
+            };
+            req.onerror = function(xhr){
+                if(error) {
+                    error(JSON.parse(xhr.target.response));
+                }
+            };
             req.send(JSON.stringify(data));
         }
     }

@@ -3,7 +3,7 @@
 function Response(){
     this.success = true;
     this.code = 0;
-    this.data = null;
+    this.date = null;
 }
 
 Response.prototype.setError = function(date, code){
@@ -12,8 +12,8 @@ Response.prototype.setError = function(date, code){
     this.code = code;
 };
 
-Response.prototype.setDate = function(data, code){
-    this.data = data;
+Response.prototype.setDate = function(date, code){
+    this.date = date;
     this.code = code;
 };
 
