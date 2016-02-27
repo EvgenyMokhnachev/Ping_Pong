@@ -1,0 +1,15 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/authorization.css')
+    body
+        h1 Ping Pong
+        div
+            input(id='email' type='email' placeholder='Enter email')
+            input(id='password' type='password' placeholder='Enter password')
+            input(id='logIn' type='button' value='Log in')
+            input(id='signUp' type='button' value='Sign up')
+            p(id='statusText')
+            script(src='/javascripts/utils/Ajax.js')
+            script(src='/javascripts/authorization.js')
