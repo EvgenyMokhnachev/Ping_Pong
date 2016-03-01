@@ -107,3 +107,20 @@ html, body{
 .cleatBoth{
     clear: both;
 }
+
+
+#profileAndLineup{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgb(250, 243, 241);
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+}
+#profile{
+    width: 50%;
+    float: left;
+}
+#lineupAndCreateGames{
+    width: 50%;
+    float: left;
+}

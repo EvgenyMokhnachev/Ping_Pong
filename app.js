@@ -15,8 +15,6 @@ var userCtrl = require('./routes/userCtrl');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-var SessionService = require('./services/SessionService.js');
-
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -30,11 +28,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
+var sessionExemplar = session({
   secret: 'keyboardCat',
   resave: false,
   saveUninitialized: true
+});
+app.use(sessionExemplar);
+
+var sharedsession = require("express-socket.io-session");
+
+var IOService = require('./services/IOService.js');
+
+IOService.use(sharedsession(sessionExemplar, {
+  autoSave:true
 }));
+
+var SessionService = require('./services/SessionService.js');
 
 app.use(function (req, res, next) {
   SessionService.init(req);

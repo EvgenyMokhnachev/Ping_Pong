@@ -91,7 +91,7 @@ module.exports = (function(){
 
         getUserById: function(id, callback){
             User.findOne({
-                id: id
+                _id: id
             }).exec(function(err, user){
                 if(callback) {
                     callback(user);

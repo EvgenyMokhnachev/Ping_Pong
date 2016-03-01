@@ -16,14 +16,14 @@ html(ng-app='dashboardApp')
                             button JOIN
                         div(class='cleatBoth')
 
-        div(id='gamesList')
+        div(id='availableUserList' ng-controller='availableUsersCtrl')
             div(class='innerBlock')
                 div(class='listTitle') AVAILABLE PLAYERS
                 div(class='listTitleHr')
                 div(class='list')
-                    div(class='listItem')
+                    div(class='listItem' ng-repeat='player in availablePlayers | filter:filterIsNotMe')
                         div(class='userInfo')
-                            span(class='username') username
+                            span(class='username') {{ player.email }}
                             span(class='userLevel')  (level 57)
                         div(class='userControls')
                             button INVITE
@@ -36,9 +36,13 @@ html(ng-app='dashboardApp')
                 div(id='achievements') ...
             div(id='lineupAndCreateGames')
                 div(id='createGameButtons')
-                    div(class='createGameBtn') CREATE GAME 1 vs 1
-                    div(class='createGameBtn') CREATE GAME 1 vs 4
-                    div(class='createGameBtn') CREATE GAME 2 vs 2
+                    button(class='createGameBtn') CREATE GAME
+                    label 1x1
+                        input(type='radio', name='gameType', checked='checked')
+                    label 1x4
+                        input(type='radio', name='gameType')
+                    label 2x2
+                        input(type='radio', name='gameType')
                 div(id='lineup')
                     div(class='player')
                         span Test 56
@@ -57,5 +61,7 @@ html(ng-app='dashboardApp')
 
     footer
         script(src='/libraries/angular_1.5.0.js')
-        script(src='/libraries/socket.io-1.4.5.js')
+        //script(src='/libraries/socket.io-1.4.5.js')
+        script(src='https://cdn.socket.io/socket.io-1.4.5.js')
         script(src='/javascripts/pages/dashboard/dashboard.js')
+        script(src='/javascripts/pages/dashboard/DashboardService.js')

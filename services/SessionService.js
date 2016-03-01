@@ -8,15 +8,17 @@ module.exports = (function(){
     return {
 
         init: function(req){
-            var views = req.session.views;
-            var sessionUser = req.session['user'];
+            var session = req.session ? req.session : req.handshake.session;
+
+            var views = session.views;
+            var sessionUser = session['user'];
 
             if (!views) {
-                views = req.session.views = {};
+                views = session.views = {};
             }
 
             if(!sessionUser) {
-                sessionUser = req.session.user = {};
+                sessionUser = session.user = {};
             }
 
             var pathname = parseurl(req)['pathname'];
@@ -24,19 +26,23 @@ module.exports = (function(){
         },
 
         setUser: function(req, user) {
-            req.session['user']['id'] = user['id'];
+            var session = req.session ? req.session : req.handshake.session;
+            session['user']['id'] = user['id'];
         },
 
         getUserId: function(req) {
-            return req.session['user']['id'];
+            var session = req.session ? req.session : req.handshake.session;
+            return session['user']['id'];
         },
 
         getUser: function(req, callback){
-            UserService.getUserById(req.session['user']['id'], callback);
+            var session = req.session ? req.session : req.handshake.session;
+            UserService.getUserById(session['user']['id'], callback);
         },
 
         logOutUser: function(req) {
-            req.session['user'] = {};
+            var session = req.session ? req.session : req.handshake.session;
+            session['user'] = {};
         }
     }
 
